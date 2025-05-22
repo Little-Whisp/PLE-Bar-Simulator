@@ -1,0 +1,47 @@
+# Unity-generated folders
+Library/
+Temp/
+Obj/
+Build/
+Builds/
+Logs/
+MemoryCaptures/
+
+# Visual Studio files
+.vscode/
+*.csproj
+*.sln
+*.user
+*.suo
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# JetBrains Rider files
+.idea/
+*.sln.iml
+
+# Crash logs
+sysinfo.txt
+
+# Unity cache
+*.pidb
+*.booproj
+
+# Ignore user-specific settings
+UserSettings/
+
+# Build output
+*.apk
+*.aab
+*.exe
+
+# Git LFS backup files
+*.tga
+*.psd
+*.fbx
+*.wav
+*.mp4
+*.mov
+*.blend
