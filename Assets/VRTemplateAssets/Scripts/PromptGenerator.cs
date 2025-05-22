@@ -7,7 +7,7 @@ public class PromptGenerator : MonoBehaviour
 {
     public TextMeshProUGUI promptText;
 
-    // ✅ This holds the current prompt
+    // This holds the current prompt
     public string currentPrompt;
 
     public void ShowPrompt(string prompt)
