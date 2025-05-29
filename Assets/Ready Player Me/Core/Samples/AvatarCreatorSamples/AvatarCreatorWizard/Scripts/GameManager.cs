@@ -9,17 +9,7 @@ namespace ReadyPlayerMe.Samples.AvatarCreatorWizard
         [SerializeField] private AvatarCreatorStateMachine avatarCreatorStateMachine;
         [SerializeField] private AvatarConfig inGameConfig;
 
-        [SerializeField] private  GameObject firstBubble;
-        [SerializeField] private  GameObject secondBubble;
-        [SerializeField] private  GameObject thirdBubble;
-
         private AvatarObjectLoader avatarObjectLoader;
-
-        void Start()
-        {
-            Debug.Log("starting the game manager");
-            //firstBubble.Generate()
-        }
 
         private void OnEnable()
         {

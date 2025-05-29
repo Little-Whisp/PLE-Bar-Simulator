@@ -47,7 +47,7 @@ public class TriggerZone : MonoBehaviour
 
         // 🎯 Log avatar type
         if (avatarInFront != null)
-        {
+        {   
             string avatarType = avatarInFront.tag;
             string prompt = promptTrigger != null ? promptTrigger.GetCurrentPrompt() : "Unknown";
 
