@@ -21,9 +21,5 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log($"[GameManager] Player served a '{avatarTag}' based on prompt: '{prompt}'");
 
-        // 🎯 Later, you could:
-        // - Save this info to a list
-        // - Score based on correct match
-        // - Trigger reactions or cutscenes
     }
 }
