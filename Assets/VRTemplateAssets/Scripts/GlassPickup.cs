@@ -4,6 +4,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class GlassPickup : MonoBehaviour
 {
     private UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable;
+    public TriggerZone triggerZone; // Add this line
 
     private void Awake()
     {
@@ -20,6 +21,12 @@ public class GlassPickup : MonoBehaviour
     {
         Debug.Log("[GlassPickupListener] Glass picked up!");
         ZoneVisualManager.Instance?.ShowAllZones();
+
+        // Notify the TriggerZone that this glass was picked up
+        if (triggerZone != null)
+        {
+            triggerZone.OnGlassPickedUp(gameObject);
+        }
     }
 
     private void OnReleased(SelectExitEventArgs args)
