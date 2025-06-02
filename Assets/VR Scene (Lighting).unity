@@ -8182,6 +8182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd7b1097939dd541b8dc94df4285e78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  triggerZone: {fileID: 0}
 --- !u!114 &970281230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12407,31 +12408,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd8ee7ca5fb6d0f43956eccb440410ef, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.050192777
+      value: 0.04677725
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd8ee7ca5fb6d0f43956eccb440410ef, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.004802789
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd8ee7ca5fb6d0f43956eccb440410ef, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.9987396
+      value: -0.9988921
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd8ee7ca5fb6d0f43956eccb440410ef, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.0018086757
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd8ee7ca5fb6d0f43956eccb440410ef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 0.233
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd8ee7ca5fb6d0f43956eccb440410ef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -174.246
+      value: -174.639
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd8ee7ca5fb6d0f43956eccb440410ef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -0.54
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd8ee7ca5fb6d0f43956eccb440410ef, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -16515,7 +16516,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 306564900335540842, guid: c9c2c9d6af4acc44fb95fba690cd9843, type: 3}
       propertyPath: m_fontSize
-      value: 10
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 306564900335540842, guid: c9c2c9d6af4acc44fb95fba690cd9843, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 306564900335540842, guid: c9c2c9d6af4acc44fb95fba690cd9843, type: 3}
       propertyPath: m_enableAutoSizing

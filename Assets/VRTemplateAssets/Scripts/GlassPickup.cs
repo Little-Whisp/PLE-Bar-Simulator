@@ -3,8 +3,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class GlassPickup : MonoBehaviour
 {
+    public TriggerZone triggerZone;
     private UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable;
-    public TriggerZone triggerZone; // Add this line
 
     private void Awake()
     {
@@ -32,7 +32,7 @@ public class GlassPickup : MonoBehaviour
     private void OnReleased(SelectExitEventArgs args)
     {
         Debug.Log("[GlassPickupListener] Glass dropped!");
-        // Optional: Hide here too, if needed
+
         ZoneVisualManager.Instance?.HideAllZones();
     }
 }
