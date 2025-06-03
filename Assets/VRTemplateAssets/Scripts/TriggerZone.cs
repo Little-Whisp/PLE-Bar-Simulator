@@ -56,7 +56,7 @@ public class TriggerZone : MonoBehaviour
 
     private void HandleGlassPlacement(GameObject glass)
     {
-        // Clean up previous avatar's bubble and rotation
+        // 🧹 Clean up previous avatar's bubble and rotation
         if (previousTextBubble != null)
         {
             Destroy(previousTextBubble);
@@ -91,7 +91,7 @@ public class TriggerZone : MonoBehaviour
             string line = FindObjectOfType<AvatarReactionManager>().GetRandomReaction(avatarTag);
             previousTextBubble = ShowTextBubble(avatarInFront, line);
 
-            // Play voice
+            // 🎤 Play voice
             PlayAvatarVoice(avatarInFront);
         }
         else
@@ -114,7 +114,6 @@ public class TriggerZone : MonoBehaviour
         if (grab != null) grab.enabled = false;
 
         // Award points + effects
-        
         scoreManager?.AddPoints(pointsPerGlass);
         GetComponent<ConfettiOnPlacement>()?.TriggerConfetti();
 
