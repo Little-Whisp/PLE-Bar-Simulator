@@ -22,10 +22,17 @@ public class ConfettiOnPlacement : MonoBehaviour
     {
         Debug.Log("Confetti and Sound should be triggered!");
 
+        // Prevent error if confettiEffect is not assigned
+        if (confettiEffect == null)
+        {
+            Debug.LogError("ConfettiOnPlacement: confettiEffect prefab is not assigned in the inspector!");
+            return;
+        }
+
         // Spawn Confetti slightly above
         Vector3 spawnPosition = transform.position + new Vector3(0, 1, 0);
         GameObject confettiInstance = Instantiate(confettiEffect, spawnPosition, Quaternion.identity);
-        
+
         // Play Particle System
         ParticleSystem ps = confettiInstance.GetComponent<ParticleSystem>();
         if (ps != null)
