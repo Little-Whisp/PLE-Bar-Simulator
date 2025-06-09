@@ -5,17 +5,20 @@ using TMPro;
 
 public class GameTimer : MonoBehaviour
 {
-    public float timeRemaining = 20f; 
+    public float timeRemaining = 20f;
     public TextMeshProUGUI timerText;
 
+    public Score scoreManager;
+
+
     public GameObject resultsPanel;
-    public ResultsUI resultsUI; 
+    public ResultsUI resultsUI;
 
     private bool hasEnded = false;
 
     void Start()
     {
-        resultsPanel.SetActive(false); 
+        resultsPanel.SetActive(false);
     }
 
     void Update()
@@ -32,8 +35,22 @@ public class GameTimer : MonoBehaviour
             hasEnded = true;
             timerText.text = "00:00";
 
-            resultsPanel.SetActive(true);     
-            resultsUI.DisplayDataBench();      
+            resultsPanel.SetActive(true);
+            resultsUI.DisplayDataBench();
+
+            // Convert your dataBench into a List<PromptResult>
+            List<PromptResult> currentSession = new List<PromptResult>();
+            foreach (var entry in scoreManager.dataBench)
+            {
+                currentSession.Add(new PromptResult
+                {
+                    prompt = entry.prompt,
+                    avatarTag = entry.avatarTag
+                });
+            }
+
+            PromptSaveSystem.SaveResults(currentSession);
         }
     }
+
 }

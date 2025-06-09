@@ -33,4 +33,10 @@ public class Score : MonoBehaviour
             scoreText.text = "Score: " + currentScore;
         }
     }
+
+    public int GetCurrentScore()
+    {
+        return currentScore;
+    }
+
 }

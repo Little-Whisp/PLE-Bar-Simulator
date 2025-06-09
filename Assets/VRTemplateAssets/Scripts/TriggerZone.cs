@@ -233,11 +233,13 @@ public class TriggerZone : MonoBehaviour
 
         bubble.transform.LookAt(Camera.main.transform);
         bubble.transform.Rotate(0, 180, 0);
+        // bubble.AddComponent<Textbubble>();
+
 
         var textField = bubble.GetComponentInChildren<TextMeshProUGUI>();
         if (textField != null)
         {
-            textField.fontSize = 3.5f;
+            textField.fontSize = 10f;
             textField.text = text;
         }
 
