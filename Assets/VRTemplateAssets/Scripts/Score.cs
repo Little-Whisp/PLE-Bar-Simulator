@@ -1,14 +1,24 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
+using System.Linq;
+
+[System.Serializable]
+public struct PromptLogEntry
+{
+    public string prompt;
+    public string avatarTag;
+}
 
 public class Score : MonoBehaviour
 {
     [Header("Score Display")]
-    public TextMeshProUGUI scoreText; // Reference to the UI Text element for score display
+    public TextMeshProUGUI scoreText;
+
+    public List<PromptLogEntry> dataBench = new List<PromptLogEntry>();
 
     private int currentScore = 0;
 
-    // Adds points to the current score and updates the UI
     public void AddPoints(int points)
     {
         currentScore += points;
@@ -16,7 +26,6 @@ public class Score : MonoBehaviour
         Debug.Log("[Score] Points Added: " + points);
     }
 
-    // Updates the score display in the UI
     private void UpdateScoreUI()
     {
         if (scoreText != null)

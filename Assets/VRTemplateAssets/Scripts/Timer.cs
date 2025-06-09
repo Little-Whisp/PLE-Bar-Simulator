@@ -1,26 +1,39 @@
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
-    using TMPro;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
 
-    public class GameTimer : MonoBehaviour
+public class GameTimer : MonoBehaviour
+{
+    public float timeRemaining = 20f; 
+    public TextMeshProUGUI timerText;
+
+    public GameObject resultsPanel;
+    public ResultsUI resultsUI; 
+
+    private bool hasEnded = false;
+
+    void Start()
     {
-        public float timeRemaining = 180f; // 3 minutes
-        public TextMeshProUGUI timerText;
+        resultsPanel.SetActive(false); 
+    }
 
-        void Update()
+    void Update()
+    {
+        if (timeRemaining > 0)
         {
-            if (timeRemaining > 0)
-            {
-                timeRemaining -= Time.deltaTime;
-                int minutes = Mathf.FloorToInt(timeRemaining / 60);
-                int seconds = Mathf.FloorToInt(timeRemaining % 60);
-                timerText.text = $"{minutes:00}:{seconds:00}";
-            }
-            else
-            {
-                timerText.text = "00:00";
-                // Trigger end of game
-            }
+            timeRemaining -= Time.deltaTime;
+            int minutes = Mathf.FloorToInt(timeRemaining / 60);
+            int seconds = Mathf.FloorToInt(timeRemaining % 60);
+            timerText.text = $"{minutes:00}:{seconds:00}";
+        }
+        else if (!hasEnded)
+        {
+            hasEnded = true;
+            timerText.text = "00:00";
+
+            resultsPanel.SetActive(true);     
+            resultsUI.DisplayDataBench();      
         }
     }
+}

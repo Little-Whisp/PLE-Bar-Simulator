@@ -49,14 +49,13 @@ public class TriggerZone : MonoBehaviour
 
         if (isGlassZone && other.CompareTag("ShotGlass"))
         {
-            Debug.Log("[TriggerZone] Detected ShotGlass, attempting to add points...");
             HandleGlassPlacement(other.gameObject);
         }
     }
 
     private void HandleGlassPlacement(GameObject glass)
     {
-        // 🧹 Clean up previous avatar's bubble and rotation
+        // Clean up previous avatar's bubble and rotation
         if (previousTextBubble != null)
         {
             Destroy(previousTextBubble);
@@ -91,7 +90,7 @@ public class TriggerZone : MonoBehaviour
             string line = FindObjectOfType<AvatarReactionManager>().GetRandomReaction(avatarTag);
             previousTextBubble = ShowTextBubble(avatarInFront, line);
 
-            // 🎤 Play voice
+            // Play voice
             PlayAvatarVoice(avatarInFront);
         }
         else
@@ -115,9 +114,26 @@ public class TriggerZone : MonoBehaviour
 
         // Award points + effects
         scoreManager?.AddPoints(pointsPerGlass);
-        GetComponent<ConfettiOnPlacement>()?.TriggerConfetti();
 
         StartCoroutine(SpawnNewGlassAfterDelay(0.5f));
+        //Show current prompt
+        string currentPrompt = promptTrigger.promptGenerator.currentPrompt;
+        //Show currrent avatar you gave the glass to
+        string characterTag = previousAvatar.tag;
+
+        scoreManager.dataBench.Add(new PromptLogEntry
+        {
+            prompt = currentPrompt,
+            avatarTag = characterTag
+        });
+
+
+        foreach (var entry in scoreManager.dataBench)
+        {
+            Debug.Log($"[DATA] Prompt: {entry.prompt}, Avatar: {entry.avatarTag}");
+        }
+
+
         promptTrigger?.ResetPrompt();
     }
 
@@ -189,16 +205,14 @@ public class TriggerZone : MonoBehaviour
     {
         if (grabbedGlass == lastSpawnedGlass)
         {
-            if (previousPlacedGlass != null)
+            if (previousPlacedGlass != null || previousTextBubble != null)
             {
                 Destroy(previousPlacedGlass);
                 previousPlacedGlass = null;
-            }
 
-            if (previousTextBubble != null)
-            {
                 Destroy(previousTextBubble);
                 previousTextBubble = null;
+
             }
 
             if (previousAvatar != null)
