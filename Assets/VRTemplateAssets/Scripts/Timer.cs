@@ -8,17 +8,20 @@ public class GameTimer : MonoBehaviour
     public float timeRemaining = 20f;
     public TextMeshProUGUI timerText;
 
-    public Score scoreManager;
+    private Score scoreManager;
 
 
-    public GameObject resultsPanel;
+    //public GameObject resultsPanel;
     public ResultsUI resultsUI;
 
     private bool hasEnded = false;
 
     void Start()
     {
-        resultsPanel.SetActive(false);
+        //resultsPanel.SetActive(false);
+        scoreManager = GetComponent<Score>();
+        Debug.Log("found score manager");
+        Debug.Log(scoreManager);
     }
 
     void Update()
@@ -35,7 +38,7 @@ public class GameTimer : MonoBehaviour
             hasEnded = true;
             timerText.text = "00:00";
 
-            resultsPanel.SetActive(true);
+            Debug.Log("show the score panel");
             resultsUI.DisplayDataBench();
 
             // Convert your dataBench into a List<PromptResult>

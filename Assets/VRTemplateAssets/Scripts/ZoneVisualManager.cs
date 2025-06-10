@@ -5,13 +5,13 @@ public class ZoneVisualManager : MonoBehaviour
     public static ZoneVisualManager Instance;
     public TriggerZone[] allZones;
 
-   private void Awake()
-{
-    Instance = this;
+    private void Awake()
+    {
+        Instance = this;
 
-    // Hide all visuals when the game starts
-    HideAllZones();
-}
+        // Hide all visuals when the game starts
+        HideAllZones();
+    }
 
 
     public void ShowAllZones()

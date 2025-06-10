@@ -7,8 +7,19 @@ public class ResultsUI : MonoBehaviour
     public TextMeshProUGUI logText;
     public Score scoreManager;
 
+    public void Start()
+    {
+        Debug.Log("hiding...");
+        gameObject.SetActive(false);
+        
+    }
+
     public void DisplayDataBench()
     {
+        Debug.Log("showing...");
+
+        gameObject.SetActive(true);
+
         if (scoreManager == null || logText == null)
         {
             Debug.LogWarning("Missing references in ResultsUI!");

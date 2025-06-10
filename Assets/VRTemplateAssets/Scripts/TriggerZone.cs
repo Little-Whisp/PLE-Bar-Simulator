@@ -41,6 +41,11 @@ public class TriggerZone : MonoBehaviour
             initialRotation = transform.rotation;
             Debug.Log("[TriggerZone] Saved initial position: " + initialPosition);
         }
+
+        // if (zoneVisual != null)
+        // {
+        //     zoneVisual.SetActive(false);  
+        // }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -205,37 +210,57 @@ public class TriggerZone : MonoBehaviour
     {
         if (grabbedGlass == lastSpawnedGlass)
         {
-            if (previousPlacedGlass != null || previousTextBubble != null)
+            // Clear the old glass (safe check)
+            if (previousPlacedGlass != null)
             {
                 Destroy(previousPlacedGlass);
                 previousPlacedGlass = null;
-
-                Destroy(previousTextBubble);
-                previousTextBubble = null;
-
             }
 
+            // Clear the old bubble properly
+            if (previousTextBubble != null)
+            {
+                Destroy(previousTextBubble);
+                previousTextBubble = null;
+            }
+
+            // Reset avatar rotation if needed
             if (previousAvatar != null)
             {
                 previousAvatar.transform.rotation = previousAvatarRotation;
+                previousAvatar = null;
+            }
+
+            if (zoneVisual != null)
+            {
+                zoneVisual.SetActive(false);
             }
         }
     }
 
+
+
     private GameObject ShowTextBubble(GameObject avatar, string text)
     {
+        // Destroy the previous one if still around
+        if (previousTextBubble != null)
+        {
+            Destroy(previousTextBubble);
+            previousTextBubble = null;
+        }
+
+        // Find the head position
         Transform head = avatar.transform.Find("Head") ?? avatar.transform;
+        Vector3 spawnPosition = head.position + new Vector3(0, 0.3f, 0); // adjust height above head
 
-        GameObject bubble = Instantiate(textBubblePrefab, head);
-        bubble.transform.localPosition = new Vector3(0, 0.3f, 0);
-        bubble.transform.localRotation = Quaternion.identity;
-        bubble.transform.localScale = Vector3.one * 0.05f;
+        // Instantiate bubble from prefab
+        GameObject bubble = Instantiate(textBubblePrefab, spawnPosition, Quaternion.identity);
 
+        // Make it face the camera
         bubble.transform.LookAt(Camera.main.transform);
         bubble.transform.Rotate(0, 180, 0);
-        // bubble.AddComponent<Textbubble>();
 
-
+        // Set text content
         var textField = bubble.GetComponentInChildren<TextMeshProUGUI>();
         if (textField != null)
         {
@@ -243,6 +268,11 @@ public class TriggerZone : MonoBehaviour
             textField.text = text;
         }
 
+        // Save reference for future cleanup
+        previousTextBubble = bubble;
+
         return bubble;
     }
+
+
 }
