@@ -1,25 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class PromptGenerator : MonoBehaviour
 {
     public TextMeshProUGUI promptText;
+    public PromptManager promptManager;
 
-    // This holds the current prompt
     public string currentPrompt;
 
-    public void ShowPrompt(string prompt)
+    public void ShowNextPrompt()
     {
-        currentPrompt = prompt; // Save the prompt for later access
-        promptText.text = prompt;
-        gameObject.SetActive(true); // Show prompt visually (or animate in)
+        currentPrompt = promptManager.GetNextPrompt();
+        promptText.text = currentPrompt;
+        gameObject.SetActive(true);
     }
 
     public void Hide()
     {
-        currentPrompt = ""; // Clear when hiding (optional, but tidy)
-        gameObject.SetActive(false); // Hide prompt
+        currentPrompt = "";
+        gameObject.SetActive(false);
     }
 }

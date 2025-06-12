@@ -1,25 +1,41 @@
-﻿using UnityEngine;
+﻿using ReadyPlayerMe.AvatarCreator;
+using ReadyPlayerMe.Core;
+using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace ReadyPlayerMe.Samples.AvatarCreatorWizard
 {
-    public static GameManager Instance;
-
-    private void Awake()
+    public class GameManager : MonoBehaviour
     {
-        // Make this a global singleton
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+        [SerializeField] private AvatarCreatorStateMachine avatarCreatorStateMachine;
+        [SerializeField] private AvatarConfig inGameConfig;
 
-    public void OnAvatarServed(string avatarTag, string prompt)
-    {
-        Debug.Log($"[GameManager] Player served a '{avatarTag}' based on prompt: '{prompt}'");
+        private AvatarObjectLoader avatarObjectLoader;
 
+        private void OnEnable()
+        {
+            avatarCreatorStateMachine.AvatarSaved += OnAvatarSaved;
+        }
+
+        private void OnDisable()
+        {
+            avatarCreatorStateMachine.AvatarSaved -= OnAvatarSaved;
+            avatarObjectLoader?.Cancel();
+        }
+
+        private void OnAvatarSaved(string avatarId)
+        {
+            avatarCreatorStateMachine.gameObject.SetActive(false);
+
+            var startTime = Time.time;
+            avatarObjectLoader = new AvatarObjectLoader();
+            avatarObjectLoader.AvatarConfig = inGameConfig;
+            avatarObjectLoader.OnCompleted += (sender, args) =>
+            {
+                AvatarAnimationHelper.SetupAnimator(args.Metadata, args.Avatar);
+                DebugPanel.AddLogWithDuration("Created avatar loaded", Time.time - startTime);
+            };
+
+            avatarObjectLoader.LoadAvatar($"{Env.RPM_MODELS_BASE_URL}/{avatarId}.glb");
+        }
     }
 }

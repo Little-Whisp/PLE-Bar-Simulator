@@ -29,6 +29,8 @@ public class TriggerZone : MonoBehaviour
     public AudioClip defaultVoiceClip;
     public AudioClip[] characterVoiceClips;
 
+    public Animator bartenderAnimator;
+
     [HideInInspector] public GameObject lastPlacedGlass;
     [HideInInspector] public GameObject lastSpawnedGlass;
     [HideInInspector] public GameObject lastTextBubble;
@@ -92,7 +94,14 @@ public class TriggerZone : MonoBehaviour
             string avatarTag = avatarInFront.tag;
             string prompt = promptTrigger != null ? promptTrigger.GetCurrentPrompt() : "Unknown";
 
-            string line = FindObjectOfType<AvatarReactionManager>().GetRandomReaction(avatarTag);
+            string line = UnityEngine.Object.FindFirstObjectByType<AvatarReactionManager>().GetRandomReaction(avatarTag);
+
+            // Trigger bartender talking animation
+            if (bartenderAnimator != null)
+            {
+                bartenderAnimator.SetTrigger("Talking");
+            }
+
             previousTextBubble = ShowTextBubble(avatarInFront, line);
 
             // Play voice
@@ -121,9 +130,10 @@ public class TriggerZone : MonoBehaviour
         scoreManager?.AddPoints(pointsPerGlass);
 
         StartCoroutine(SpawnNewGlassAfterDelay(0.5f));
-        //Show current prompt
+
+        // Show current prompt
         string currentPrompt = promptTrigger.promptGenerator.currentPrompt;
-        //Show currrent avatar you gave the glass to
+        // Show current avatar you gave the glass to
         string characterTag = previousAvatar.tag;
 
         scoreManager.dataBench.Add(new PromptLogEntry
@@ -132,12 +142,10 @@ public class TriggerZone : MonoBehaviour
             avatarTag = characterTag
         });
 
-
         foreach (var entry in scoreManager.dataBench)
         {
             Debug.Log($"[DATA] Prompt: {entry.prompt}, Avatar: {entry.avatarTag}");
         }
-
 
         promptTrigger?.ResetPrompt();
     }
