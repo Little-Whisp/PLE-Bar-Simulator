@@ -1,47 +1,45 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class GameTimer : MonoBehaviour
 {
-    public float timeRemaining = 20f;
+    public float totalTime = 20f;
     public TextMeshProUGUI timerText;
-
-    private Score scoreManager;
-
-
-    //public GameObject resultsPanel;
     public ResultsUI resultsUI;
 
+    private Score scoreManager;
     private bool hasEnded = false;
+    private float currentTime;
+    private bool isRunning = false;
 
     void Start()
     {
-        //resultsPanel.SetActive(false);
         scoreManager = GetComponent<Score>();
         Debug.Log("found score manager");
         Debug.Log(scoreManager);
+        ResetTimer();
     }
 
     void Update()
     {
-        if (timeRemaining > 0)
+        if (!isRunning || hasEnded)
+            return;
+
+        if (currentTime > 0)
         {
-            timeRemaining -= Time.deltaTime;
-            int minutes = Mathf.FloorToInt(timeRemaining / 60);
-            int seconds = Mathf.FloorToInt(timeRemaining % 60);
+            currentTime -= Time.deltaTime;
+            int minutes = Mathf.FloorToInt(currentTime / 60);
+            int seconds = Mathf.FloorToInt(currentTime % 60);
             timerText.text = $"{minutes:00}:{seconds:00}";
         }
-        else if (!hasEnded)
+        else
         {
             hasEnded = true;
             timerText.text = "00:00";
-
             Debug.Log("show the score panel");
             resultsUI.DisplayDataBench();
 
-            // Convert your dataBench into a List<PromptResult>
             List<PromptResult> currentSession = new List<PromptResult>();
             foreach (var entry in scoreManager.dataBench)
             {
@@ -51,9 +49,30 @@ public class GameTimer : MonoBehaviour
                     avatarTag = entry.avatarTag
                 });
             }
-
             PromptSaveSystem.SaveResults(currentSession);
         }
     }
 
+    public void StartTimer()
+    {
+        ResetTimer();
+        isRunning = true;
+    }
+
+    public void PauseTimer(bool pause)
+    {
+        isRunning = !pause;
+    }
+
+    public bool IsRunning()
+    {
+        return isRunning;
+    }
+
+    private void ResetTimer()
+    {
+        currentTime = totalTime;
+        hasEnded = false;
+        timerText.text = $"{Mathf.FloorToInt(currentTime / 60):00}:{Mathf.FloorToInt(currentTime % 60):00}";
+    }
 }
