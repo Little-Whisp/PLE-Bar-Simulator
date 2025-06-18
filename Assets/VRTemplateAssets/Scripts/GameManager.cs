@@ -165,6 +165,12 @@ public class GameManager : MonoBehaviour
             gameTimer.PauseTimer(isPaused);
     }
 
+    public string GetPlayerID()
+    {
+        return currentData != null ? currentData.playerID : "UnknownPlayer";
+    }
+
+
 
     public void ResumeGame()
     {

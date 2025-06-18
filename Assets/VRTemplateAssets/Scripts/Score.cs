@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 
 [System.Serializable]
-public struct PromptLogEntry
+public class PromptLogEntry
 {
     public string prompt;
     public string avatarTag;
+    public string timestamp;  
+    public string playerID;  
 }
+
 
 public class Score : MonoBehaviour
 {

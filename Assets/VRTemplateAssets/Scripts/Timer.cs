@@ -46,8 +46,12 @@ public class GameTimer : MonoBehaviour
                 currentSession.Add(new PromptResult
                 {
                     prompt = entry.prompt,
-                    avatarTag = entry.avatarTag
+                    avatarTag = entry.avatarTag,
+                    timestamp = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                    playerID = GameManager.Instance.GetPlayerID()
                 });
+
+
             }
             PromptSaveSystem.SaveResults(currentSession);
         }

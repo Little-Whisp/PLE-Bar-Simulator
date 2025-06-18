@@ -7,6 +7,8 @@ public class PromptResult
 {
     public string prompt;
     public string avatarTag;
+    public string timestamp;
+    public string playerID;
 }
 
 [Serializable]
