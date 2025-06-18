@@ -874,7 +874,7 @@
                     "id": "33754c03-48ec-46ef-9bc6-22ed6bfdd8e8",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Press",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -981,8 +981,8 @@
                 {
                     "name": "",
                     "id": "71a4d23f-3e9a-4513-923b-ba388c5e84bf",
-                    "path": "<XRSimulatedController>{LeftHand}/triggerButton",
-                    "interactions": "Press(behavior=2)",
+                    "path": "<XRController>{LeftHand}/{GripButton}",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Select",
@@ -2052,7 +2052,7 @@
                 {
                     "name": "",
                     "id": "1ce80054-410d-4112-a332-50faa7fb4f23",
-                    "path": "<XRSimulatedController>{RightHand}/triggerButton",
+                    "path": "<XRController>{RightHand}/{GripButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -2482,7 +2482,7 @@
                     "name": "Submit",
                     "type": "Button",
                     "id": "eba98c2e-6268-4233-bb88-946287bc753c",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -2897,19 +2897,8 @@
                 },
                 {
                     "name": "",
-                    "id": "c4036d23-d74c-4405-b7eb-798372ccdeeb",
-                    "path": "<XRController>{LeftHand}/{TriggerButton}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Submit",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b20acdec-f01a-49e2-8ec0-92951986c177",
-                    "path": "<XRController>{RightHand}/{TriggerButton}",
+                    "id": "9f2a7c29-a588-4b6a-a966-955eb408c526",
+                    "path": "*/{Submit}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

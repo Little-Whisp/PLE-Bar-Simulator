@@ -37,27 +37,35 @@ public class PromptManager : ScriptableObject
 
     public string GetNextPrompt()
     {
+        // Step 1: Pick the category to use
         string category = cycleOrder[currentCategoryIndex];
+
+        // Step 2: Loop to the next category for next time
         currentCategoryIndex = (currentCategoryIndex + 1) % cycleOrder.Length;
 
+        // Step 3: Grab prompts + usedIndices
         List<string> prompts = categories[category];
         List<int> usedIndices = usedIndicesPerCategory[category];
 
-        if (prompts.Count == 0)
+        // Step 4: Handle empty prompt list
+        if (prompts == null || prompts.Count == 0)
             return $"No prompts in {category}.";
 
+        // Step 5: If we've used all, reset just that category's history
         if (usedIndices.Count >= prompts.Count)
             usedIndices.Clear();
 
+        // Step 6: Pick a new unused random prompt
         int index;
         do
         {
             index = Random.Range(0, prompts.Count);
-        } while (usedIndices.Contains(index));
+        } while (usedIndices.Contains(index) && usedIndices.Count < prompts.Count);
 
         usedIndices.Add(index);
         return prompts[index];
     }
+
 
     public void ResetCategoryCycle()
     {
