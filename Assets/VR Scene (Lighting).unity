@@ -12103,6 +12103,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5849765079216124530, guid: fd28f23af44f73f4a95e33435872ad15, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5849765079216124530, guid: fd28f23af44f73f4a95e33435872ad15, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5849765079216124530, guid: fd28f23af44f73f4a95e33435872ad15, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0.000022888184
       objectReference: {fileID: 0}
@@ -25015,7 +25023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e937ce4fae4c147a10cce0e755d9a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalTime: 20
+  totalTime: 180
   timerText: {fileID: 478959337}
   resultsUI: {fileID: 1327322793}
 --- !u!114 &2104263933
